@@ -22,8 +22,8 @@ jobs:
       - name: Install, build, and upload your site
         uses: withastro/action@v2
         with:
-            # Assumes you are using npm based on our earlier setup
-            package-manager: npm
+            package-manager: npm 
+            node-version: 22 
 
   deploy:
     needs: build
