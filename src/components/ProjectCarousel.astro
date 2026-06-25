@@ -1,0 +1,224 @@
+---
+// src/components/ProjectCarousel.astro
+
+// Use Vite's native glob importer to safely bypass Astro's content restrictions
+const projectFiles = import.meta.glob('../content/engineering/*.md', { eager: true });
+const projects = Object.values(projectFiles);
+---
+
+<section class="section with-background">
+    <header class="section-header stack gap-2 lg:gap-4">
+        <h3>Featured Engineering</h3>
+        <p>A showcase of my deployable applications, local AI frameworks, and analytical dashboards.</p>
+    </header>
+
+    <div class="carousel-wrapper">
+        <button id="prevBtn" class="carousel-btn" aria-label="Previous Project">❮</button>
+        
+        <div class="carousel-track">
+            {
+                projects.map((project) => (
+                    <div class="carousel-card">
+                        <div class="card-image">
+                            <!-- Notice we use project.frontmatter to grab the data -->
+                            <img src={project.frontmatter.img} alt={project.frontmatter.title} />
+                        </div>
+                        <div class="card-content">
+                            <h4>{project.frontmatter.title}</h4>
+                            <p>{project.frontmatter.description}</p>
+                            <a href={project.frontmatter.repo_url} target="_blank" rel="noopener noreferrer" class="repo-link">View Repository →</a>
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+
+        <button id="nextBtn" class="carousel-btn" aria-label="Next Project">❯</button>
+    </div>
+</section>
+
+<style>
+    .carousel-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        width: 100%;
+        height: 500px;
+        overflow: hidden;
+        margin-top: 2rem;
+    }
+
+    .carousel-track {
+        position: relative;
+        width: 100%;
+        max-width: 900px;
+        height: 400px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .carousel-card {
+        position: absolute;
+        width: 340px;
+        height: 380px;
+        transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        background: var(--gray-999_40);
+        border: 1px solid var(--gray-800);
+        border-radius: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        opacity: 0;
+        z-index: 0;
+        transform: translateX(0) scale(0.5);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .card-image {
+        width: 100%;
+        height: 160px;
+        background: var(--gray-800);
+        border-bottom: 1px solid var(--gray-800);
+    }
+
+    .card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .card-content {
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    .carousel-card h4 {
+        font-size: var(--text-lg);
+        color: var(--gray-0);
+        margin-bottom: 0.5rem;
+        line-height: 1.2;
+    }
+
+    .carousel-card p {
+        font-size: var(--text-sm);
+        color: var(--gray-300);
+        margin-bottom: 1rem;
+        flex-grow: 1;
+    }
+
+    .repo-link {
+        color: var(--accent-regular);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: var(--text-sm);
+        transition: color 0.2s;
+    }
+
+    .repo-link:hover {
+        color: var(--gray-0);
+    }
+
+    /* Cover Flow Classes */
+    .carousel-card.active {
+        opacity: 1;
+        z-index: 3;
+        transform: translateX(0) scale(1);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        border: 1px solid var(--accent-regular);
+    }
+
+    .carousel-card.prev {
+        opacity: 0.5;
+        z-index: 2;
+        transform: translateX(-65%) scale(0.85);
+        cursor: pointer;
+    }
+
+    .carousel-card.next {
+        opacity: 0.5;
+        z-index: 2;
+        transform: translateX(65%) scale(0.85);
+        cursor: pointer;
+    }
+
+    .carousel-card.prev:hover, .carousel-card.next:hover {
+        opacity: 0.8;
+    }
+
+    .carousel-btn {
+        z-index: 10;
+        background: var(--gray-999);
+        color: var(--gray-300);
+        border: 2px solid var(--gray-800);
+        border-radius: 50%;
+        width: 48px;
+        height: 48px;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .carousel-btn:hover {
+        background: var(--accent-regular);
+        color: white;
+        border-color: var(--accent-regular);
+    }
+
+    @media (max-width: 50em) {
+        .carousel-card.prev { transform: translateX(-40%) scale(0.8); }
+        .carousel-card.next { transform: translateX(40%) scale(0.8); }
+        .carousel-card { width: 280px; height: 340px; }
+    }
+</style>
+
+<script>
+    const track = document.querySelector('.carousel-track');
+    if (track) {
+        const cards = Array.from(track.querySelectorAll('.carousel-card'));
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        
+        let currentIndex = 0;
+
+        function updateCarousel() {
+            if(cards.length === 0) return; 
+            
+            cards.forEach((card, index) => {
+                card.className = 'carousel-card hidden'; 
+                
+                if (index === currentIndex) {
+                    card.classList.add('active');
+                } else if (index === (currentIndex - 1 + cards.length) % cards.length) {
+                    card.classList.add('prev');
+                } else if (index === (currentIndex + 1) % cards.length) {
+                    card.classList.add('next');
+                }
+            });
+        }
+
+        nextBtn?.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % cards.length;
+            updateCarousel();
+        });
+
+        prevBtn?.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+            updateCarousel();
+        });
+
+        cards.forEach((card, index) => {
+            card.addEventListener('click', () => {
+                if (card.classList.contains('prev') || card.classList.contains('next')) {
+                    currentIndex = index;
+                    updateCarousel();
+                }
+            });
+        });
+
+        updateCarousel();
+    }
+</script>

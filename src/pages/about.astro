@@ -1,119 +1,123 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
 import ContactCTA from '../components/ContactCTA.astro';
 import Hero from '../components/Hero.astro';
-import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="About | Jeanine White" description="About Jeanine White Lorem Ipsum">
-	<div class="stack gap-20">
-		<main class="wrapper about">
-			<Hero
-				title="About"
-				tagline="Thanks for stopping by. Read below to learn more about myself and my background."
-			>
-				<img
-					width="1553"
-					height="873"
-					src="/assets/at-work.jpg"
-					alt="Jeanine White at work with a colleague"
-				/>
-			</Hero>
+<BaseLayout title="About | Ibad-ur-Rehman Rashid" description="About Ibad-ur-Rehman Rashid - AI/NLP Researcher">
+    <div class="stack gap-20">
+        <main class="wrapper about">
+            <Hero
+                title="About"
+                tagline="Discover my background, my research trajectory, and the systems I build."
+            />
 
-			<section>
-				<h2 class="section-title">Background</h2>
-				<div class="content">
-					<p>
-						Lorem ipsum dolor sit amet, <a href="https://astro.build/">Astro</a> makes people happy. Sed
-						do eiusmod tempor incididunt ut labore et dolore magna aliqua. Proin nibh nisl condimentum
-						id venenatis a condimentum vitae. Dapibus ultrices in iaculis nunc. Arcu odio ut sem nulla
-						pharetra diam sit amet. Diam quis enim lobortis scelerisque fermentum dui faucibus in ornare.
-					</p>
-					<p>
-						Arcu dui vivamus arcu felis bibendum ut tristique et egestas. Eget gravida cum sociis
-						natoque penatibus. Cras fermentum odio eu feugiat pretium nibh. Proin nibh nisl
-						condimentum id venenatis. Porta nibh venenatis cras sed felis eget velit. Id diam vel
-						quam elementum pulvinar etiam non.
-					</p>
-					<p>
-						Ultrices tincidunt arcu non sodales neque sodales ut. Sed enim ut sem viverra aliquet
-						eget sit amet. Lacus luctus accumsan tortor posuere ac ut consequat semper viverra.
-						Viverra accumsan in nisl nisi scelerisque eu ultrices. In massa tempor nec feugiat nisl
-						pretium fusce.
-					</p>
-				</div>
-			</section>
-			<section>
-				<h2 class="section-title">Education</h2>
-				<div class="content">
-					<p>Corporis voluptates tenetur laudantium.</p>
-				</div>
-			</section>
-			<section>
-				<h2 class="section-title">Skills</h2>
-				<div class="content">
-					<p>officia unde omnis</p>
-				</div>
-			</section>
-		</main>
+            <section>
+                <h2 class="section-title">Background</h2>
+                <div class="content">
+                    <p>
+                        I am a computer science graduate from Government Postgraduate College Mansehra, specializing in Natural Language Processing (NLP) and Artificial Intelligence architectures. My core focus lies in the intersection of advanced language models and robust system engineering.
+                    </p>
+                    <p>
+                        I spend my time exploring and optimizing Large Language Models (LLMs), Transformer architectures, and Retrieval-Augmented Generation (RAG) frameworks. Beyond theoretical research, I am actively involved in developing practical, deployable systems, such as building cross-lingual retrieval benchmarks and designing platforms for collaborative prompt engineering.
+                    </p>
+                    <p>
+                        My engineering environment of choice is Linux—specifically Fedora KDE and where I optimize both software stacks and hardware configurations for intensive computational tasks.
+                    </p>
+                </div>
+            </section>
 
-		<ContactCTA />
-	</div>
+            <section>
+                <h2 class="section-title">Research Vision</h2>
+                <div class="content">
+                    <p>
+                        My current research explores the boundaries of semantic reasoning in AI. I recently co-authored research presented at the AbjadNLP workshop (ACL), focusing on structured ontologies and multi-hop reasoning for specialized linguistic domains. 
+                    </p>
+                    <p>
+                        Looking forward, I am preparing for advanced graduate studies in the 2027 academic cycle. My goal is to deepen my expertise in cutting-edge fields such as Quantum Natural Language Processing and Neuro-symbolic AI.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="section-title">Core Competencies</h2>
+                <div class="content">
+                    <ul class="skills-list">
+                        <li><strong>AI & NLP:</strong> Large Language Models, Transformers, RAG Architecture, Agentic AI, Cross-Lingual Benchmarking.</li>
+                        <li><strong>Development:</strong> SaaS Platform Design, Dashboard Architecture, Collaborative Engineering Frameworks.</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <ContactCTA />
+    </div>
 </BaseLayout>
 
 <style>
-	.about {
-		display: flex;
-		flex-direction: column;
-		gap: 3.5rem;
-	}
+    .about {
+        display: flex;
+        flex-direction: column;
+        gap: 3.5rem;
+    }
 
-	img {
-		margin-top: 1.5rem;
-		border-radius: 1.5rem;
-		box-shadow: var(--shadow-md);
-	}
+    img {
+        margin-top: 1.5rem;
+        border-radius: 1.5rem;
+        box-shadow: var(--shadow-md);
+    }
 
-	section {
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-		color: var(--gray-200);
-	}
+    section {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        color: var(--gray-200);
+    }
 
-	.section-title {
-		grid-column-start: 1;
-		font-size: var(--text-xl);
-		color: var(--gray-0);
-	}
+    .section-title {
+        grid-column-start: 1;
+        font-size: var(--text-xl);
+        color: var(--gray-0);
+    }
 
-	.content {
-		grid-column: 2 / 4;
-	}
+    .content {
+        grid-column: 2 / 4;
+    }
 
-	.content :global(a) {
-		text-decoration: 1px solid underline transparent;
-		text-underline-offset: 0.25em;
-		transition: text-decoration-color var(--theme-transition);
-	}
+    .content p {
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+    }
 
-	.content :global(a:hover),
-	.content :global(a:focus) {
-		text-decoration-color: currentColor;
-	}
+    .skills-list {
+        list-style-type: none;
+        padding: 0;
+    }
 
-	@media (min-width: 50em) {
-		.about {
-			display: grid;
-			grid-template-columns: 1fr 60% 1fr;
-		}
+    .skills-list li {
+        margin-bottom: 0.8rem;
+        padding-left: 1rem;
+        border-left: 3px solid var(--accent-regular); /* Uses your theme's accent color */
+    }
 
-		.about > :global(:first-child) {
-			grid-column-start: 2;
-		}
+    .skills-list strong {
+        color: var(--gray-0);
+    }
 
-		section {
-			display: contents;
-			font-size: var(--text-lg);
-		}
-	}
+    @media (min-width: 50em) {
+        .about {
+            display: grid;
+            grid-template-columns: 1fr 60% 1fr;
+        }
+
+        .about > :global(:first-child) {
+            grid-column-start: 2;
+        }
+
+        section {
+            display: contents;
+            font-size: var(--text-lg);
+        }
+    }
 </style>
